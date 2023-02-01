@@ -2,5 +2,5 @@
 2022.05.16-i "Építményadó" emelt szintű informatika érettségi feladat megoldása csoportmunkában.
 
 Csapattagok:
-- Kiss Martin
-- Gehér Marcell
+# Kiss Martin
+# Gehér Marcell
