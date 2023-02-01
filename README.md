@@ -3,5 +3,6 @@
 2022.05.16-i "Építményadó" emelt szintű informatika érettségi feladat megoldása csoportmunkában.
 
 Csapattagok:
-# Kiss Martin<sup>Junior</sup>
-# Gehér Marcell<sup>Senior</sup>
+
+- Kiss Martin<sup><sup>Junior</sup></sup>
+- Gehér Marcell<sup><sup>Senior</sup></sup>
