@@ -1,15 +1,27 @@
 class haz:
     # 5-jegyű-adószám Utca-neve házszám adósáv alapterület
-    _adószám: int
+    _adoszam: int
     _utca: str
-    _házszám: str
-    _adósáv: str
-    _terület: int
+    _hazszam: str
+    _adosav: str
+    _terulet: int
+
+    @property
+    def adoszam(self) -> int:
+        return self._adoszam
+
+    @property
+    def utca(self) -> str:
+        return self._utca
+
+    @property
+    def hazszam(self) -> str:
+        return self._hazszam
 
     def __init__(self, line: str):
-        line = line.strip(" ")
-        self._adószám = int(line[0])
-        self._utca = line[1]
-        self._házszám = line[2]
-        self._adósáv = line[3]
-        self._terület = int(line[4])
+        a, u, h, a2, t = line.split(" ")
+        self._adoszam = int(a)
+        self._utca = u
+        self._hazszam = h
+        self._adosav = a2
+        self._terulet = int(t)
