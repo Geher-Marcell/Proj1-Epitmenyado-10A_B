@@ -20,27 +20,24 @@ class megoldas:
                 fizetendo_ado = alapterulet * e
         return fizetendo_ado
 
-    def hazak_utani_adok(self):
-        A_adosav: haz = []
-        B_adosav: haz = []
-        C_adosav: haz = []
+    def lekerdezett_adosav_adoja(self, adosav: str) -> int:
+        adosav_ado: int = 0
         for i in self._hazak:
-            akt_ado = 0
-            if i.adosav == "A":
-                akt_ado = self.ado(i.adosav, i.terulet)
-        return A_adosav
-            
-                
-
+            if i.adosav == adosav:
+                if self.ado(i.adosav, i.terulet) < 10000:
+                    continue
+                adosav_ado += self.ado(i.adosav, i.terulet)
+        return adosav_ado
 
     @property
     def hazak_adosavokban(self):
-        adosavok_stat: dict[str, int] = {}
+        adosavok_stat: dict[str, int] = {
+            "A": 0,
+            "B": 0,
+            "C": 0
+        }
         for h in self._hazak:
-            if h.adosav in adosavok_stat:
-                adosavok_stat[h.adosav] += 1
-            else:
-                adosavok_stat[h.adosav] = 1
+            adosavok_stat[h.adosav] += 1
         return adosavok_stat
 
     # 3. feladat rossz, b része nincs kész

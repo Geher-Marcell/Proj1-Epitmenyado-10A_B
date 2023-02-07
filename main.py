@@ -12,8 +12,9 @@ def main() -> None:
     keresendo_adoszam: int = int(input("3. feladat. Egy tulajdonos adószáma: "))
     print(m.keresett_telkek(keresendo_adoszam))
 
+    print('5. feladat')
     for key, value in m.hazak_adosavokban.items():
-        print(f'\t{key} - {value} db')
+        print(f'\t{key} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(key)} Ft')
 
 
 if __name__ == "__main__":
