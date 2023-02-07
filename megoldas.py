@@ -8,6 +8,19 @@ class megoldas:
     def hazak_szama(self) -> int:
         return len(self._hazak)
 
+    def ado(self, adosav: str, alapterulet: int) -> int:
+        fizetendo_ado = 0
+        adosavok: dict[str, int] = {
+            "A": 800,
+            "B": 600,
+            "C": 100
+        }
+        for i, e in adosavok.items():
+            if i == adosav:
+                fizetendo_ado = alapterulet * e
+        return fizetendo_ado
+
+    # 3. feladat rossz, b része nincs kész
     def keresett_telkek(self, adoszam: int) -> str:
         szoveg: str = ""
         for i in self._hazak:
