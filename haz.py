@@ -18,10 +18,18 @@ class haz:
     def hazszam(self) -> str:
         return self._hazszam
 
+    @property
+    def adosav(self) -> str:
+        return self._adosav
+
+    @property
+    def terulet(self) -> int:
+        return self._terulet
+
     def __init__(self, line: str):
-        a, u, h, a2, t = line.split(" ")
-        self._adoszam = int(a)
-        self._utca = u
-        self._hazszam = h
-        self._adosav = a2
-        self._terulet = int(t)
+        adoszam, utca, hazszam, adosav, terulet = line.split(" ")
+        self._adoszam = int(adoszam)
+        self._utca = utca
+        self._hazszam = hazszam
+        self._adosav = adosav
+        self._terulet = int(terulet)
