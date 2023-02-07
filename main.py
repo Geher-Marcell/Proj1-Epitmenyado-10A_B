@@ -1,5 +1,10 @@
+from megoldas import megoldas
+
+
 def main() -> None:
-    pass  # Kezd a kódolást itt!
+    # 1. feladat
+    m = megoldas("utca.txt")
+    print(m)
 
 
 if __name__ == "__main__":
