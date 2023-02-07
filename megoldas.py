@@ -20,6 +20,29 @@ class megoldas:
                 fizetendo_ado = alapterulet * e
         return fizetendo_ado
 
+    def hazak_utani_adok(self):
+        A_adosav: haz = []
+        B_adosav: haz = []
+        C_adosav: haz = []
+        for i in self._hazak:
+            akt_ado = 0
+            if i.adosav == "A":
+                akt_ado = self.ado(i.adosav, i.terulet)
+        return A_adosav
+            
+                
+
+
+    @property
+    def hazak_adosavokban(self):
+        adosavok_stat: dict[str, int] = {}
+        for h in self._hazak:
+            if h.adosav in adosavok_stat:
+                adosavok_stat[h.adosav] += 1
+            else:
+                adosavok_stat[h.adosav] = 1
+        return adosavok_stat
+
     # 3. feladat rossz, b része nincs kész
     def keresett_telkek(self, adoszam: int) -> str:
         szoveg: str = ""
