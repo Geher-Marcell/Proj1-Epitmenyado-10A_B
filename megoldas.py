@@ -20,13 +20,13 @@ class megoldas:
                 fizetendo_ado = alapterulet * e
         return fizetendo_ado
 
-    # 3. feladat rossz, b része nincs kész
     def keresett_telkek(self, adoszam: int) -> str:
         szoveg: str = ""
         for i in self._hazak:
             if i.adoszam == adoszam:
                 szoveg += f'\t{i.utca} utca {i.hazszam}\n'
-        return szoveg
+
+        return szoveg if szoveg != "" else "Nem szerepel az adatállományban."
 
     def __init__(self, file: str):
         self._hazak = []
