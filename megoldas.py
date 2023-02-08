@@ -4,6 +4,35 @@ from haz import haz
 class megoldas:
     _hazak: list[haz]
 
+    def adosavok_utcaban(self, utca: str) -> dict[str, int]:
+        adosavok: dict[str, int] = {
+            "A": 0,
+            "B": 0,
+            "C": 0
+        }
+        for i in self._hazak:
+            if i.utca == utca:
+                adosavok[i.adosav] += 1
+        return adosavok
+
+    @property
+    def felul_vizsgalandok(self):
+        utcak: list[str] = []
+        szoveg: str = ""
+        for i in self._hazak:
+            if i.utca not in utcak:
+                utcak.append(i.utca)
+
+        savok_szama: int = 0
+        for i in utcak:
+            for key in self.adosavok_utcaban(i).keys():
+                if self.adosavok_utcaban(i)[key] > 0:
+                    savok_szama += 1
+            if savok_szama > 1:
+                szoveg += f'\t{i}\n'
+            savok_szama = 0
+        return szoveg if szoveg != "" else "\tNincs ilyen utca."
+
     @property
     def hazak_szama(self) -> int:
         return len(self._hazak)
