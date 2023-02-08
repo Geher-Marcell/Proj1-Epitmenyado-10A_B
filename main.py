@@ -17,7 +17,7 @@ def main() -> None:
 
     print(m.keresett_telkek(keresendo_adoszam), end="")
 
-    print('5. feladat')
+    print('\n5. feladat')
     for key, value in m.hazak_adosavokban.items():
         print(f'\t{key} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(key)} Ft')
 
