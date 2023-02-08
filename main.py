@@ -10,7 +10,8 @@ def main() -> None:
 
     # 3. feladat
     try:
-        keresendo_adoszam: int = int(input("3. feladat. Egy tulajdonos adószáma: "))
+        keresendo_adoszam: int = int(
+            input("3. feladat. Egy tulajdonos adószáma: "))
     except ValueError:
         print("Hibás típus!")
         return
@@ -19,10 +20,14 @@ def main() -> None:
 
     print('5. feladat')
     for key, value in m.hazak_adosavokban.items():
-        print(f'\t{key} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(key)} Ft')
+        print(
+            f'\t{key} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(key)} Ft')
 
     print('6. feladat')
     print(m.felul_vizsgalandok)
+
+    print("7. feladat")
+    m.write_file("fizetendo.txt")
 
 
 if __name__ == "__main__":

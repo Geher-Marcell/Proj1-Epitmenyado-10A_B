@@ -4,6 +4,17 @@ from haz import haz
 class megoldas:
     _hazak: list[haz]
 
+    def write_file(self, filenév: str):
+        adok: dict[str, int] = {}
+        for i in self._hazak:
+            if i.adoszam not in adok:
+                adok[i.adoszam] = 0
+            adok[i.adoszam] += self.ado(i.adosav, i.terulet)
+
+        with open(filenév, "w", encoding="utf-8") as f:
+            for key, value in adok.items():
+                f.write(f'{key} {value}\n')
+
     def adosavok_utcaban(self, utca: str) -> dict[str, int]:
         adosavok: dict[str, int] = {
             "A": 0,
@@ -15,7 +26,7 @@ class megoldas:
                 adosavok[i.adosav] += 1
         return adosavok
 
-    @property
+    @ property
     def felul_vizsgalandok(self):
         utcak: list[str] = []
         szoveg: str = ""
@@ -25,7 +36,7 @@ class megoldas:
 
         savok_szama: int = 0
         for i in utcak:
-            for key in self.adosavok_utcaban(i).keys():
+            for key, value in self.adosavok_utcaban(i).items():
                 if self.adosavok_utcaban(i)[key] > 0:
                     savok_szama += 1
             if savok_szama > 1:
@@ -33,7 +44,7 @@ class megoldas:
             savok_szama = 0
         return szoveg if szoveg != "" else "\tNincs ilyen utca."
 
-    @property
+    @ property
     def hazak_szama(self) -> int:
         return len(self._hazak)
 
@@ -47,18 +58,18 @@ class megoldas:
         for i, e in adosavok.items():
             if i == adosav:
                 fizetendo_ado = alapterulet * e
+                if fizetendo_ado < 10000:
+                    fizetendo_ado = 0
         return fizetendo_ado
 
     def lekerdezett_adosav_adoja(self, adosav: str) -> int:
         adosav_ado: int = 0
         for i in self._hazak:
             if i.adosav == adosav:
-                if self.ado(i.adosav, i.terulet) < 10000:
-                    continue
                 adosav_ado += self.ado(i.adosav, i.terulet)
         return adosav_ado
 
-    @property
+    @ property
     def hazak_adosavokban(self):
         adosavok_stat: dict[str, int] = {
             "A": 0,
@@ -82,3 +93,4 @@ class megoldas:
         with open(file, "r", encoding="utf-8") as f:
             for line in f.read().splitlines()[1:]:
                 self._hazak.append(haz(line))
+            f.close()
