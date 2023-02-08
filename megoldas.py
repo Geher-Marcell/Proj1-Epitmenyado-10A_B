@@ -20,6 +20,26 @@ class megoldas:
                 fizetendo_ado = alapterulet * e
         return fizetendo_ado
 
+    def lekerdezett_adosav_adoja(self, adosav: str) -> int:
+        adosav_ado: int = 0
+        for i in self._hazak:
+            if i.adosav == adosav:
+                if self.ado(i.adosav, i.terulet) < 10000:
+                    continue
+                adosav_ado += self.ado(i.adosav, i.terulet)
+        return adosav_ado
+
+    @property
+    def hazak_adosavokban(self):
+        adosavok_stat: dict[str, int] = {
+            "A": 0,
+            "B": 0,
+            "C": 0
+        }
+        for h in self._hazak:
+            adosavok_stat[h.adosav] += 1
+        return adosavok_stat
+        
     def keresett_telkek(self, adoszam: int) -> str:
         szoveg: str = ""
         for i in self._hazak:
@@ -33,3 +53,4 @@ class megoldas:
         with open(file, "r", encoding="utf-8") as f:
             for line in f.read().splitlines()[1:]:
                 self._hazak.append(haz(line))
+                
