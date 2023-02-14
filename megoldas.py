@@ -59,20 +59,6 @@ class megoldas:
                 adosavok[i.adosav] += 1
         return adosavok
 
-    def adosavok(self, file: str):
-        adosavok: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
-        with open(file, "r", encoding="utf-8") as f:
-            for line in f.read().splitlines()[:1]:
-                adosavok["A"] = int(line.split(" ")[0])
-                adosavok["B"] = int(line.split(" ")[1])
-                adosavok["C"] = int(line.split(" ")[2])
-        f.close()
-        return adosavok
-
     def ado(self, adosav: str, alapterulet: int) -> int:
         fizetendo_ado = 0
         adosavok: dict[str, int] = self._adosavok
@@ -101,12 +87,15 @@ class megoldas:
     def __init__(self, file: str):
         self._hazak = []
         with open(file, "r", encoding="utf-8") as f:
-            adosavok = f.read().splitlines()[0].split(" ")
+            adosavok: list[str] = []
+            for i, line in enumerate(f.read().splitlines()):
+                if i == 0:
+                    adosavok = line.split(" ")
+                else:
+                    self._hazak.append(haz(line))
             self._adosavok = {
                 "A": int(adosavok[0]),
                 "B": int(adosavok[1]),
                 "C": int(adosavok[2])
             }
-            for line in f.read().splitlines()[1:]:
-                self._hazak.append(haz(line))
             f.close()
