@@ -6,28 +6,30 @@ def main() -> None:
     m = megoldas("utca.txt")
 
     # 2. feladat
-    print(f'2. feladat. A mintában {m.hazak_szama} telek szerepel')
+    print(f'2. feladat. A mintában {m.hazak_szama} telek szerepel.')
 
     # 3. feladat
     try:
         keresendo_adoszam: int = int(
             input("3. feladat. Egy tulajdonos adószáma: "))
     except ValueError:
-        print("Hibás típus!")
+        print("Hibás input!")
         return
 
     print(m.keresett_telkek(keresendo_adoszam))
 
+    # 5. feladat
     print('5. feladat')
-    for key, value in m.hazak_adosavokban.items():
+    for kulcs, ertek in m.hazak_adosavokban.items():
         print(
-            f'\t{key} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(key)} Ft')
+            f'\t{kulcs} sávba {ertek} telek esik, az adó {m.lekerdezett_adosav_adoja(kulcs)} Ft.')
 
-    print('6. feladat')
+    # 6. feladat
+    print('6. feladat. A több sávba sorolt utcák:')
     print(m.felul_vizsgalandok)
 
-    print("7. feladat")
-    m.write_file("fizetendo.txt")
+    # 7. feladat
+    m.fajl_kiiras("fizetendo.txt")
 
 
 if __name__ == "__main__":

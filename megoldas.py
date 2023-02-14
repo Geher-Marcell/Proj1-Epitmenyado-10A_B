@@ -4,16 +4,48 @@ from haz import haz
 class megoldas:
     _hazak: list[haz]
 
-    def write_file(self, filenév: str):
-        adok: dict[str, int] = {}
+    @ property
+    def felul_vizsgalandok(self):
+        utcak: list[str] = []
+        szoveg: str = ""
+        for i in self._hazak:
+            if i.utca not in utcak:
+                utcak.append(i.utca)
+        savok_szama: int = 0
+        for i in utcak:
+            for kulcs in self.adosavok_utcaban(i):
+                if self.adosavok_utcaban(i)[kulcs] > 0:
+                    savok_szama += 1
+            if savok_szama > 1:
+                szoveg += f'\t{i}\n'
+            savok_szama = 0
+        return szoveg if szoveg != "" else "\tNincs ilyen utca."
+
+    @ property
+    def hazak_szama(self) -> int:
+        return len(self._hazak)
+
+    @ property
+    def hazak_adosavokban(self):
+        adosavok_stat: dict[str, int] = {
+            "A": 0,
+            "B": 0,
+            "C": 0
+        }
+        for h in self._hazak:
+            adosavok_stat[h.adosav] += 1
+        return adosavok_stat
+
+    def fajl_kiiras(self, filenev: str):
+        adok: dict[int, int] = {}
         for i in self._hazak:
             if i.adoszam not in adok:
                 adok[i.adoszam] = 0
             adok[i.adoszam] += self.ado(i.adosav, i.terulet)
 
-        with open(filenév, "w", encoding="utf-8") as f:
-            for key, value in adok.items():
-                f.write(f'{key} {value}\n')
+        with open(filenev, "w", encoding="utf-8") as f:
+            for kulcs, ertek in adok.items():
+                f.write(f'{kulcs} {ertek}\n')
 
     def adosavok_utcaban(self, utca: str) -> dict[str, int]:
         adosavok: dict[str, int] = {
@@ -25,28 +57,6 @@ class megoldas:
             if i.utca == utca:
                 adosavok[i.adosav] += 1
         return adosavok
-
-    @ property
-    def felul_vizsgalandok(self):
-        utcak: list[str] = []
-        szoveg: str = ""
-        for i in self._hazak:
-            if i.utca not in utcak:
-                utcak.append(i.utca)
-
-        savok_szama: int = 0
-        for i in utcak:
-            for key, value in self.adosavok_utcaban(i).items():
-                if self.adosavok_utcaban(i)[key] > 0:
-                    savok_szama += 1
-            if savok_szama > 1:
-                szoveg += f'\t{i}\n'
-            savok_szama = 0
-        return szoveg if szoveg != "" else "\tNincs ilyen utca."
-
-    @ property
-    def hazak_szama(self) -> int:
-        return len(self._hazak)
 
     def ado(self, adosav: str, alapterulet: int) -> int:
         fizetendo_ado = 0
@@ -68,17 +78,6 @@ class megoldas:
             if i.adosav == adosav:
                 adosav_ado += self.ado(i.adosav, i.terulet)
         return adosav_ado
-
-    @ property
-    def hazak_adosavokban(self):
-        adosavok_stat: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
-        for h in self._hazak:
-            adosavok_stat[h.adosav] += 1
-        return adosavok_stat
 
     def keresett_telkek(self, adoszam: int) -> str:
         szoveg: str = ""
