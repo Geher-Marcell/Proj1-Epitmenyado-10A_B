@@ -20,9 +20,9 @@ def main() -> None:
 
     # 5. feladat
     print('5. feladat')
-    for kulcs, value in m.hazak_adosavokban.items():
+    for kulcs, ertek in m.hazak_adosavokban.items():
         print(
-            f'\t{kulcs} sávba {value} telek esik, az adó {m.lekerdezett_adosav_adoja(kulcs)} Ft.')
+            f'\t{kulcs} sávba {ertek} telek esik, az adó {m.lekerdezett_adosav_adoja(kulcs)} Ft.')
 
     # 6. feladat
     print('6. feladat. A több sávba sorolt utcák:')
