@@ -18,7 +18,7 @@ class megoldas:
                 if self.keresett_utca_adosava(i)[kulcs] > 0:
                     savok_szama += 1
             if savok_szama > 1:
-                szoveg += f'\t{i}\n'
+                szoveg += f'{i}\n'
             savok_szama = 0
         return szoveg if szoveg != "" else "Nincs ilyen utca."
 
@@ -80,7 +80,7 @@ class megoldas:
         szoveg: str = ""
         for i in self._hazak:
             if i.adoszam == adoszam:
-                szoveg += f'\t{i.utca} utca {i.hazszam}\n'
+                szoveg += f'{i.utca} utca {i.hazszam}\n'
 
         return szoveg if szoveg != "" else "Nem szerepel az adatállományban."
 
