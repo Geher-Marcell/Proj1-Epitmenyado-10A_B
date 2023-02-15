@@ -3,7 +3,6 @@ from haz import haz
 
 class megoldas:
     _hazak: list[haz]
-    _adosavok: dict[str, int]
 
     @ property
     def felul_vizsgalandok(self):
@@ -42,7 +41,7 @@ class megoldas:
         for i in self._hazak:
             if i.adoszam not in adok:
                 adok[i.adoszam] = 0
-            adok[i.adoszam] += self.ado(i.adosav, i.terulet)
+            adok[i.adoszam] += i.ado
 
         with open(filenev, "w", encoding="utf-8") as f:
             for kulcs, ertek in adok.items():
@@ -59,21 +58,11 @@ class megoldas:
                 adosavok[i.adosav] += 1
         return adosavok
 
-    def ado(self, adosav: str, alapterulet: int) -> int:
-        fizetendo_ado = 0
-        adosavok: dict[str, int] = self._adosavok
-        for i, e in adosavok.items():
-            if i == adosav:
-                fizetendo_ado = alapterulet * e
-                if fizetendo_ado < 10000:
-                    fizetendo_ado = 0
-        return fizetendo_ado
-
     def lekerdezett_adosav_adoja(self, adosav: str) -> int:
         adosav_ado: int = 0
         for i in self._hazak:
             if i.adosav == adosav:
-                adosav_ado += self.ado(i.adosav, i.terulet)
+                adosav_ado += i.ado
         return adosav_ado
 
     def keresett_telkek(self, adoszam: int) -> str:
@@ -93,7 +82,7 @@ class megoldas:
                     adosavok = line.split(" ")
                 else:
                     self._hazak.append(haz(line))
-            self._adosavok = {
+            haz.adosavok = {
                 "A": int(adosavok[0]),
                 "B": int(adosavok[1]),
                 "C": int(adosavok[2])

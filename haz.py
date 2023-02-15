@@ -5,6 +5,18 @@ class haz:
     _hazszam: str
     _adosav: str
     _terulet: int
+    adosavok: dict[str, int]
+
+    @property
+    def ado(self) -> int:
+        fizetendo_ado = 0
+        adosavok: dict[str, int] = haz.adosavok
+        for i, e in adosavok.items():
+            if i == self._adosav:
+                fizetendo_ado = self.terulet * e
+                if fizetendo_ado < 10000:
+                    fizetendo_ado = 0
+        return fizetendo_ado
 
     @property
     def adoszam(self) -> int:
