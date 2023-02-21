@@ -31,7 +31,6 @@ class Megoldas:
         adosavok_stat: dict[str, int] = {}
         for i in range(len(Haz.adosavok.keys())):
             adosavok_stat[self.abc[i]] = 0
-
         for h in self._hazak:
             adosavok_stat[h.adosav] += 1
         return adosavok_stat
@@ -42,7 +41,6 @@ class Megoldas:
             if i.adoszam not in adok:
                 adok[i.adoszam] = 0
             adok[i.adoszam] += i.ado
-
         with open(filenev, "w", encoding="utf-8") as f:
             for kulcs, ertek in adok.items():
                 f.write(f'{kulcs} {ertek}\n')

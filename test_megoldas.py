@@ -14,9 +14,19 @@ class TestMegoldas(TestCase):
         self.assertEqual(self.mo.keresett_telkek(68396), 'Harmat utca 22\nSzepesi utca 17\n')
 
     def test_osszesitett_ado(self) -> None:
-        i = 0
         for kulcs, ertek in self.mo.hazak_szama_adosavokban.items():
-            self.assertEqual(kulcs, self.mo.abc[i])
-            self.assertEqual(ertek, self.mo.hazak_szama_adosavokban[kulcs])
-            self.assertEqual(self.mo.lekerdezett_adosav_adoja(kulcs), self.mo.lekerdezett_adosav_adoja(kulcs))
-            i += 1
+            if kulcs == 'A':
+                self.assertEqual(kulcs, 'A')
+                self.assertEqual(ertek, 165)
+                self.assertEqual(self.mo.lekerdezett_adosav_adoja(kulcs), 20805600)
+            if kulcs == 'B':
+                self.assertEqual(kulcs, 'B')
+                self.assertEqual(ertek, 144)
+                self.assertEqual(self.mo.lekerdezett_adosav_adoja(kulcs), 13107000)
+            if kulcs == 'C':
+                self.assertEqual(kulcs, 'C')
+                self.assertEqual(ertek, 234)
+                self.assertEqual(self.mo.lekerdezett_adosav_adoja(kulcs), 3479600)
+
+    def test_tobb_savba_sorolt_utcak(self) -> None:
+        self.assertEqual(self.mo.felul_vizsgalandok, 'Besztercei\nGyurgyalag\nIcce\nKurta\nRezeda\nSzepesi\n')
