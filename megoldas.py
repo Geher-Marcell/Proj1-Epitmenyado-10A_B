@@ -75,19 +75,16 @@ class megoldas:
     def __init__(self, file: str):
         self._hazak = []
         with open(file, "r", encoding="utf-8") as f:
-            adok: list[str] = []
             haz.adosavok = {}
-
             for i, line in enumerate(f.read().splitlines()):
                 if i == 0:
                     adok = line.split(" ")
-
                     for i, e in enumerate(adok):
                         haz.adosavok[self._abc[i]] = int(e)
                 else:
-                    ujhaz: haz = haz(line)
-                    self._hazak.append(ujhaz)
-                    if ujhaz.adosav not in haz.adosavok.keys():
+                    akt_haz: haz = haz(line)
+                    self._hazak.append(akt_haz)
+                    if akt_haz.adosav not in haz.adosavok.keys():
                         print(f"Hibás az állomány! Sor:{i+1}")
                         exit()
             f.close()
