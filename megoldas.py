@@ -3,6 +3,7 @@ from haz import haz
 
 class megoldas:
     _hazak: list[haz]
+    _abc: list[str] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
     @ property
     def felul_vizsgalandok(self):
@@ -27,11 +28,10 @@ class megoldas:
 
     @ property
     def hazak_szama_adosavokban(self):
-        adosavok_stat: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
+        adosavok_stat: dict[str, int] = {}
+        for i in range(len(haz.adosavok.keys())):
+            adosavok_stat[self._abc[i]] = 0
+
         for h in self._hazak:
             adosavok_stat[h.adosav] += 1
         return adosavok_stat
@@ -48,11 +48,10 @@ class megoldas:
                 f.write(f'{kulcs} {ertek}\n')
 
     def keresett_utca_adosava(self, utca: str) -> dict[str, int]:
-        adosavok: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
+        adosavok: dict[str, int] = {}
+        for i in range(len(haz.adosavok.keys())):
+            adosavok[self._abc[i]] = 0
+
         for i in self._hazak:
             if i.utca == utca:
                 adosavok[i.adosav] += 1
@@ -76,15 +75,16 @@ class megoldas:
     def __init__(self, file: str):
         self._hazak = []
         with open(file, "r", encoding="utf-8") as f:
-            adosavok: list[str] = []
+            haz.adosavok = {}
             for i, line in enumerate(f.read().splitlines()):
                 if i == 0:
-                    adosavok = line.split(" ")
+                    adok = line.split(" ")
+                    for i, e in enumerate(adok):
+                        haz.adosavok[self._abc[i]] = int(e)
                 else:
-                    self._hazak.append(haz(line))
-            haz.adosavok = {
-                "A": int(adosavok[0]),
-                "B": int(adosavok[1]),
-                "C": int(adosavok[2])
-            }
+                    akt_haz: haz = haz(line)
+                    self._hazak.append(akt_haz)
+                    if akt_haz.adosav not in haz.adosavok.keys():
+                        print(f"Hibás az állomány! Sor:{i+1}")
+                        exit()
             f.close()
