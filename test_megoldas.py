@@ -17,6 +17,6 @@ class TestMegoldas(TestCase):
         i = 0
         for kulcs, ertek in self.mo.hazak_szama_adosavokban.items():
             self.assertEqual(kulcs, self.mo.abc[i])
-            self.assertEqual(ertek, ertek)
+            self.assertEqual(ertek, self.mo.hazak_szama_adosavokban[kulcs])
             self.assertEqual(self.mo.lekerdezett_adosav_adoja(kulcs), self.mo.lekerdezett_adosav_adoja(kulcs))
             i += 1
