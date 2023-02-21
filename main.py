@@ -1,9 +1,9 @@
-from megoldas import megoldas
+from megoldas import Megoldas
 
 
 def main() -> None:
     # 1. feladat
-    m = megoldas("utca2.txt")
+    m = Megoldas("utca.txt")
 
     # 2. feladat
     print(f'2. feladat. A mintában {m.hazak_szama} telek szerepel.')
@@ -16,7 +16,7 @@ def main() -> None:
         print("Hibás input!")
         return
 
-    print(m.keresett_telkek(keresendo_adoszam))
+    print(m.keresett_telkek(keresendo_adoszam), end='')
 
     # 5. feladat
     print('5. feladat')

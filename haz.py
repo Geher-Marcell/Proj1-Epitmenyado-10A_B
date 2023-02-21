@@ -1,4 +1,4 @@
-class haz:
+class Haz:
     # 5-jegyű-adószám Utca-neve házszám adósáv alapterület
     _adoszam: int
     _utca: str
@@ -10,7 +10,7 @@ class haz:
     @property
     def ado(self) -> int:
         fizetendo_ado = 0
-        adosavok: dict[str, int] = haz.adosavok
+        adosavok: dict[str, int] = Haz.adosavok
         for i, e in adosavok.items():
             if i == self._adosav:
                 fizetendo_ado = self.terulet * e
