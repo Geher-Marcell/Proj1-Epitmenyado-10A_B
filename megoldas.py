@@ -3,6 +3,7 @@ from haz import haz
 
 class megoldas:
     _hazak: list[haz]
+    _abc: list[str] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
     @ property
     def felul_vizsgalandok(self):
@@ -73,18 +74,23 @@ class megoldas:
 
         return szoveg if szoveg != "" else "Nem szerepel az adatállományban."
 
+# pylint: disable=no-member
     def __init__(self, file: str):
         self._hazak = []
         with open(file, "r", encoding="utf-8") as f:
-            adosavok: list[str] = []
+            adok: list[str] = []
+            haz.adosavok = {}
+
             for i, line in enumerate(f.read().splitlines()):
                 if i == 0:
-                    adosavok = line.split(" ")
+                    adok = line.split(" ")
+
+                    for i, e in enumerate(adok):
+                        haz.adosavok[self._abc[i]] = int(e)
                 else:
                     self._hazak.append(haz(line))
-            haz.adosavok = {
-                "A": int(adosavok[0]),
-                "B": int(adosavok[1]),
-                "C": int(adosavok[2])
-            }
+                    if haz(line).adosav not in haz.adosavok.keys():
+                        print("ERROR " + haz(line).adosav)
+                        exit()
             f.close()
+# pylint: enable=no-member
