@@ -28,11 +28,10 @@ class megoldas:
 
     @ property
     def hazak_szama_adosavokban(self):
-        adosavok_stat: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
+        adosavok_stat: dict[str, int] = {}
+        for i in range(len(haz.adosavok.keys())):
+            adosavok_stat[self._abc[i]] = 0
+
         for h in self._hazak:
             adosavok_stat[h.adosav] += 1
         return adosavok_stat
@@ -49,11 +48,10 @@ class megoldas:
                 f.write(f'{kulcs} {ertek}\n')
 
     def keresett_utca_adosava(self, utca: str) -> dict[str, int]:
-        adosavok: dict[str, int] = {
-            "A": 0,
-            "B": 0,
-            "C": 0
-        }
+        adosavok: dict[str, int] = {}
+        for i in range(len(haz.adosavok.keys())):
+            adosavok[self._abc[i]] = 0
+
         for i in self._hazak:
             if i.utca == utca:
                 adosavok[i.adosav] += 1
@@ -74,7 +72,6 @@ class megoldas:
 
         return szoveg if szoveg != "" else "Nem szerepel az adatállományban."
 
-# pylint: disable=no-member
     def __init__(self, file: str):
         self._hazak = []
         with open(file, "r", encoding="utf-8") as f:
@@ -88,9 +85,9 @@ class megoldas:
                     for i, e in enumerate(adok):
                         haz.adosavok[self._abc[i]] = int(e)
                 else:
-                    self._hazak.append(haz(line))
-                    if haz(line).adosav not in haz.adosavok.keys():
-                        print("ERROR " + haz(line).adosav)
+                    ujhaz: haz = haz(line)
+                    self._hazak.append(ujhaz)
+                    if ujhaz.adosav not in haz.adosavok.keys():
+                        print(f"Hibás az állomány! Sor:{i+1}")
                         exit()
             f.close()
-# pylint: enable=no-member

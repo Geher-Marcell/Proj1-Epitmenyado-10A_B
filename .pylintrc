@@ -11,4 +11,5 @@ disable=
     R0903, # disable too few public methods
     W0640, # disable cell var from loop
     C0111, # Missing docstring
-    W0703  # broad-except
+    W0703,  # broad-except
+    E1101 # no-member
