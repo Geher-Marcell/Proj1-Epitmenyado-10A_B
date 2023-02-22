@@ -12,4 +12,5 @@ disable=
     W0640, # disable cell var from loop
     C0111, # Missing docstring
     W0703,  # broad-except
-    E1101 # no-member
+    E1101, # no-member
+    C0201, # Consider iterating the dictionary directly instead of calling .keys()
