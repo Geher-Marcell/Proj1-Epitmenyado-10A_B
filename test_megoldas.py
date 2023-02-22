@@ -1,3 +1,4 @@
+import filecmp
 from unittest import TestCase
 from megoldas import Megoldas
 
@@ -30,3 +31,7 @@ class TestMegoldas(TestCase):
 
     def test_tobb_savba_sorolt_utcak(self) -> None:
         self.assertEqual(self.mo.felul_vizsgalandok, 'Besztercei\nGyurgyalag\nIcce\nKurta\nRezeda\nSzepesi\n')
+
+    def test_fizetendo_hasonlitas(self):
+        self.mo.fajl_kiiras('fizetendo.txt')
+        self.assertTrue(filecmp.cmp('fizetendo.txt', 'fizetendo_OH.txt', shallow=False))
